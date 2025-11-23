@@ -31,7 +31,7 @@ class _AddEditHabitScreenState extends State<AddEditHabitScreen> {
       _habit = args['habit'];
       _userId = args['userId'];
       if (_isEdit && _habit != null) {
-        _nameCtl.text = _habit!.name;
+        _nameCtl.text = _habit!.name; // test commit
       }
       if (!_isEdit && _userId == null) {
         _userId = args['userId'];
