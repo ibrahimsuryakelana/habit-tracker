@@ -10,8 +10,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _userCtl = TextEditingController();
-  final _passCtl = TextEditingController();
+  final _userCtl = TextEditingController(); //untuk input username
+  final _passCtl = TextEditingController(); //untuk input password
   bool _loading = false;
   String? _error;
 
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final err = await auth.login(_userCtl.text, _passCtl.text);
     setState(() { _loading = false; });
     if (err != null) {
-      setState(() { _error = err; });
+      setState(() { _error = err; }); //error jika login gagal
     } else {
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     }
