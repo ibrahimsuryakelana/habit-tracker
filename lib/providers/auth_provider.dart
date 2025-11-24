@@ -1,13 +1,13 @@
-import 'dart:convert';
+import 'dart:convert'; //ubah data jadi JSON
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:crypto/crypto.dart';
+import 'package:crypto/crypto.dart'; //hashing password atau ubah data menjadi kode unik untuk password
 import '../models/user.dart';
 import 'package:uuid/uuid.dart';
 
 class AuthProvider with ChangeNotifier {
-  static const String _usersKey = 'habit_users';
-  final Uuid _uuid = Uuid();
+  static const String _usersKey = 'habit_users'; 
+  final Uuid _uuid = Uuid(); //untuk id unik
 
   List<UserModel> _users = [];
   UserModel? _currentUser;
@@ -33,7 +33,7 @@ class AuthProvider with ChangeNotifier {
   Future<void> _saveUsers() async {
     final prefs = await SharedPreferences.getInstance();
     final list = _users.map((u) => u.toMap()).toList();
-    await prefs.setString(_usersKey, json.encode(list));
+    await prefs.setString(_usersKey, json.encode(list)); // simpan dalam bentuk JSON
   }
 
   String _hashPassword(String password) {
@@ -63,7 +63,7 @@ class AuthProvider with ChangeNotifier {
     final hash = _hashPassword(password);
     final u = _users.firstWhere(
       (user) => user.username == username && user.passwordHash == hash,
-      orElse: () => null as UserModel,
+      orElse: () => null as UserModel, // jika tidak ditemukan -> null
     );
     if (u == null) {
       return 'Login gagal: username atau password salah';
